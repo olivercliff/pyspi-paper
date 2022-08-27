@@ -5,16 +5,22 @@ import seaborn as sns
 import numpy as np
 from scipy.stats import percentileofscore
 
-scores = pd.read_csv(f'data/spis.csv',index_col=0)
-nulls = pd.read_csv(f'data/null.csv',index_col=0)
+use_precomputed = True
+
+if use_precomputed == True:
+    scores = pd.read_csv(f'data/spis.csv',index_col=0)
+    nulls = pd.read_csv(f'data/null.csv',index_col=0)
+    score_all = pd.read_csv(f'data/all.csv',index_col=0)
+else:
+    scores = pd.read_csv(f'results/BasicMotions-spis.csv',index_col=0)
+    nulls = pd.read_csv(f'results/BasicMotions-spis-null.csv',index_col=0)
+    score_all = pd.read_csv(f'results/BasicMotions-score.csv',index_col=0)
 
 categories = pd.read_csv('data/categories.csv',index_col=0)
 modules = pd.read_csv('data/modules.csv',index_col=0)
 
 categories = categories.rename(columns={'0':'class'})
 modules = modules.rename(columns={'0':'module'})
-
-score_all = pd.read_csv(f'data/all.csv',index_col=0)
 
 dorder = ['causal','distance','infotheory','spectral','misc','basic','wavelet']
 morder = modules['module'].unique()

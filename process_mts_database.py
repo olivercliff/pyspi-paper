@@ -12,6 +12,7 @@ names = names[:3]
 datasets = [database[n]['data'].T for n in names]
 labels = [database[n]['labels'] for n in names]
 
+# Set fast=True to speed things up
 calcf = CalculatorFrame(datasets=datasets,labels=labels,names=names,fast=True)
 calcf.compute()
 
