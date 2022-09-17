@@ -3,7 +3,11 @@ import _pickle as cPickle
 
 import tslearn.datasets
 
-from pyspi.calculator import CalculatorFrame
+try:
+    from pyspi.calculator import CalculatorFrame
+except ModuleNotFoundError:
+    # You're probably using the pynats branch
+    from pynats.calculator import CalculatorFrame
 
 uea_ds = 'BasicMotions'
 
@@ -11,22 +15,20 @@ data_loader = tslearn.datasets.UCR_UEA_datasets()
 
 X_train, y_train, X_test, y_test = data_loader.load_dataset(uea_ds)
 
-# X_train = X_train[:2]
-# X_test = X_test[:2]
-
-# y_train = y_train[:2]
-# y_test = y_test[:2]
-
 names_train = [uea_ds+f'-{i}-{y}' for i, y in enumerate(y_train)]
 names_test = [uea_ds+f'-{i}-{y}' for i, y in enumerate(y_test)]
 
 X_train = np.transpose(X_train, axes=(0,2,1))
 X_test = np.transpose(X_test, axes=(0,2,1))
 
-cf_train = CalculatorFrame(datasets=X_train, labels=np.atleast_2d(y_train).T,
-                            names=names_train, fast=True)
-cf_test = CalculatorFrame(datasets=X_test, labels=np.atleast_2d(y_test).T,
-                            names=names_test, fast=True)
+try:
+    cf_train = CalculatorFrame(datasets=X_train, labels=y_train[:, np.newaxis],
+                                names=names_train, fast=True)
+    cf_test = CalculatorFrame(datasets=X_test, labels=y_train[:, np.newaxis],
+                                names=names_test, fast=True)
+except TypeError:
+    cf_train = CalculatorFrame(datasets=X_train, labels=y_train[:, np.newaxis], names=names_train)
+    cf_test = CalculatorFrame(datasets=X_test, labels=y_train[:, np.newaxis], names=names_test)
 
 # Combine the frames
 
