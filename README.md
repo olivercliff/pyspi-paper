@@ -30,4 +30,4 @@ pip install .
 # Generating the figures
 
 The main figures from the paper that are generated from the code in this repository are Figs. 2 and 3.
-Because of the large amount of processing required to generate these figures, we have provided pre-computed databases from which you can easily regenerate the figures.
+Because of the large amount of processing required to generate these figures, we have provided pre-computed databases from which you can easily regenerate the figures in [generate_figures.ipynb](https://github.com/olivercliff/nat-comp-sci-paper/blob/main/generate_figures.ipynb)
