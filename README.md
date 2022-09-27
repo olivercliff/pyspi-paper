@@ -1,6 +1,6 @@
 # Code for ``Unifying pairwise interactions in complex dynamics''
 
-This repository illustrates how the figures in the paper, ``Unifying pairwise interactions in complex dynamics'' were created.
+This repository illustrates how to recreate the main figures and results from the paper: [``Unifying pairwise interactions in complex dynamics''](https://arxiv.org/abs/2201.11941).
 
 It contains both precomputed databases with which to recreate the figures, as well as scripts to generate these databases from scratch.
 
